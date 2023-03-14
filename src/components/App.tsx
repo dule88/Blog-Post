@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { useAppDispatch } from "../hooks/useAppDispatch";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import { fetchUsers, selectUsers } from "../redux/user/userSlice";
+import { Navbar } from "./app/Navbar";
 import { GlobalStyles } from "./GlobalStyles/GlobalStyles";
 
 const StyledWrapper = styled.div`
@@ -20,28 +21,38 @@ export const App = () => {
   }, []);
 
   return (
-    <StyledWrapper>
-      <GlobalStyles />
+    <>
+      <Navbar />
+      <StyledWrapper>
+        <GlobalStyles />
 
-      <h1>NaviPartner Tech Test</h1>
+        <h1>NaviPartner Tech Test</h1>
 
-      <h2>Create your app here!</h2>
-      <p>Let's get you started:</p>
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-          </tr>
-        </thead>
-        <tbody>
-          {subsetOfUsers.map((user) => (
-            <tr key={user.id}>
-              <td>{user.first_name}</td>
-              <td>{user.last_name}</td>
+        <h2>Create your app here!</h2>
+        <p>Let's get you started:</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Last Name</th>
+              <th>Email</th>
+              <th>Gender</th>
+              <th>IP Address</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </StyledWrapper>
+          </thead>
+          <tbody>
+            {subsetOfUsers.map((user) => (
+              <tr key={user.id}>
+                <td>{user.first_name}</td>
+                <td>{user.last_name}</td>
+                <td>{user.email}</td>
+                <td>{user.gender}</td>
+                <td>{user.ip_address}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </StyledWrapper>
+    </>
   );
 };
