@@ -1,11 +1,16 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
+import Counter from './features/counter/Counter';
+
 
 import { useAppDispatch } from "../hooks/useAppDispatch";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import { fetchUsers, selectUsers } from "../redux/user/userSlice";
 import { Navbar } from "./app/Navbar";
 import { GlobalStyles } from "./GlobalStyles/GlobalStyles";
+
+
+
 
 const StyledWrapper = styled.div`
   padding: 24px;
@@ -25,8 +30,8 @@ export const App = () => {
       <Navbar />
       <StyledWrapper>
         <GlobalStyles />
-
-        <h1>NaviPartner Tech Test</h1>
+        <Counter />
+        {/* <h1>NaviPartner Tech Test</h1>
 
         <h2>Create your app here!</h2>
         <p>Let's get you started:</p>
@@ -51,7 +56,7 @@ export const App = () => {
               </tr>
             ))}
           </tbody>
-        </table>
+        </table> */}
       </StyledWrapper>
     </>
   );

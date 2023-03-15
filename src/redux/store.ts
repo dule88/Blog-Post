@@ -3,11 +3,12 @@ import {
   configureStore,
   PreloadedState,
 } from "@reduxjs/toolkit";
-
+import counterReducer from '../components/features/counter/counterSlice';
 import userReducer from "./user/userSlice";
 
 const rootReducer = combineReducers({
   user: userReducer,
+  counter: counterReducer,
   // TODO: Add more reducers here if needed
 });
 
