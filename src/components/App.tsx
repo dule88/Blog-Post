@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import Counter from './features/counter/Counter';
+
 
 
 import { useAppDispatch } from "../hooks/useAppDispatch";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import { fetchUsers, selectUsers } from "../redux/user/userSlice";
 import { Navbar } from "./app/Navbar";
+import PostList from "./features/posts/PostList";
 import { GlobalStyles } from "./GlobalStyles/GlobalStyles";
 
 
@@ -30,7 +31,7 @@ export const App = () => {
       <Navbar />
       <StyledWrapper>
         <GlobalStyles />
-        <Counter />
+        <PostList/>
         {/* <h1>NaviPartner Tech Test</h1>
 
         <h2>Create your app here!</h2>

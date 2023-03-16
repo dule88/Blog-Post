@@ -3,12 +3,12 @@ import {
   configureStore,
   PreloadedState,
 } from "@reduxjs/toolkit";
-import counterReducer from '../components/features/counter/counterSlice';
 import userReducer from "./user/userSlice";
+import postReducer from '../components/features/posts/postsSlice';
 
 const rootReducer = combineReducers({
   user: userReducer,
-  counter: counterReducer,
+  posts: postReducer,
   // TODO: Add more reducers here if needed
 });
 
