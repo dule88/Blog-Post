@@ -5,7 +5,7 @@ import React from "react";
 
 const PostList = () => {
 
-  const posts = useSelector(selectAllPosts); 
+   const posts = useSelector(selectAllPosts); 
   
   const renderPosts = posts.map(post => (
     <article key={post.id}>

@@ -7,8 +7,10 @@ import { useAppDispatch } from "../hooks/useAppDispatch";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import { fetchUsers, selectUsers } from "../redux/user/userSlice";
 import { Navbar } from "./app/Navbar";
+import AddPostForm from "./features/posts/AddPostForm";
 import PostList from "./features/posts/PostList";
 import { GlobalStyles } from "./GlobalStyles/GlobalStyles";
+
 
 
 
@@ -31,6 +33,7 @@ export const App = () => {
       <Navbar />
       <StyledWrapper>
         <GlobalStyles />
+        <AddPostForm/>
         <PostList/>
         {/* <h1>NaviPartner Tech Test</h1>
 
