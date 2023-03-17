@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { nanoid } from "@reduxjs/toolkit";
+
 
 import { postAdded } from "./postsSlice";
 
 export const AddPostForm = () => {
+
+const dispatch = useDispatch();  
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const dispatch = useDispatch();
+  
+  
 
   const onTitleChanged = (e: React.FormEvent<HTMLInputElement>) =>
     setTitle((e.target as HTMLInputElement).value);
@@ -16,17 +19,12 @@ export const AddPostForm = () => {
 
   const onSavePostClicked = () => {
     if (title && content) {
-      dispatch(
-        postAdded({
-            title,
-            content,
-        })
-      )
-
+        dispatch(postAdded(title, content))
+      
       setTitle("");
       setContent("");
     }
-  };
+  }
   
   return (
     <section>

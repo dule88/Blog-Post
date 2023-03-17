@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, nanoid, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../../redux/store";
 
 const initialState = [
@@ -6,17 +6,33 @@ const initialState = [
     {id: '2', title: 'Slice', content: "The more I say slice, the more I want pizza."},
 ]
 
+
 const postsSlice = createSlice({
     name: 'posts',
     initialState,
     reducers: {
-        postAdded(state, action) {
-            state.push(action.payload)
-        }
-    },
+        postAdded: {
+            reducer(
+              state,
+              action: PayloadAction<{ id: string; title: string; content: string }>
+            ) {
+              state.push(action.payload);
+            },
+            prepare(title, content) {
+              return {
+                  payload: {
+                      id: nanoid(),
+                      title,
+                      content
+                  }
+              }
+            }
+          },
+    }
 });
 
 export const selectAllPosts = (state: RootState) => state.posts;
+
 
 export const { postAdded } = postsSlice.actions;
 
