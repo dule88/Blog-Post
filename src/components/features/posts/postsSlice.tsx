@@ -1,9 +1,21 @@
 import { createSlice, nanoid, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../../redux/store";
+import sub from "date-fns/sub";
 
 const initialState = [
-    {id: '1', title: 'Learning Redux Toolkit', content: "I've heard good things.", userId: 4},
-    {id: '2', title: 'Slice', content: "The more I say slice, the more I want pizza.", userId: 3},
+    {id: '1',
+    title: 'Learning Redux Toolkit',
+    content: "I've heard good things.",
+    userId: 1,
+    date: sub(new Date(), { minutes: 10 }).toISOString(),
+},
+    {id: '2',
+    title: 'Slice', 
+    content: "The more I say slice, the more I want pizza.", 
+    userId: 2,
+    date: sub(new Date(), { minutes: 5 }).toISOString(),
+},
+    
 ]
 
 
@@ -14,7 +26,7 @@ const postsSlice = createSlice({
         postAdded: {
             reducer(
               state,
-              action: PayloadAction<{ id: string; title: string; content: string; userId: number;}>
+              action: PayloadAction<{ id: string; title: string; content: string; userId: number; date: string}>
             ) {
               state.push(action.payload);
             },
@@ -24,6 +36,7 @@ const postsSlice = createSlice({
                       id: nanoid(),
                       title,
                       content,
+                      date: new Date().toISOString(),
                       userId
                   }
               }

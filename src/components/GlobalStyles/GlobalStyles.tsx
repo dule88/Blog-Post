@@ -21,6 +21,7 @@ export const GlobalStyles = React.memo(
       min-height: 100vh;
       font-size: 1.5rem;
       background-color: #676363;
+      box-sizing: border-box;
     }
     
     input,
@@ -44,7 +45,8 @@ export const GlobalStyles = React.memo(
     
     nav {
       display: flex;
-      justify-content: flex-end;
+      justify-content: center;
+    
     }
     
     nav ul {
@@ -72,6 +74,10 @@ export const GlobalStyles = React.memo(
     
     section {
       margin-top: 1em;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
     }
     
     article {
@@ -87,6 +93,7 @@ export const GlobalStyles = React.memo(
     
     h2 {
       margin-bottom: 1rem;
+    
     }
     
     p {
@@ -99,6 +106,7 @@ export const GlobalStyles = React.memo(
     form {
       display: flex;
       flex-direction: column;
+      
     }
     
     textarea {
