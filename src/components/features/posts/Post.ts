@@ -2,8 +2,7 @@ export interface Post {
     id: string;
     title: string;
     content: string;
-    user: string;
+    userId: number;
     date: string;
-    reactions: any;
 }
 

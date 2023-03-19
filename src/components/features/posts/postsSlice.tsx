@@ -1,8 +1,9 @@
 import { createSlice, nanoid, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../../redux/store";
 import sub from "date-fns/sub";
+import { Post } from "./Post";
 
-const initialState = [
+const initialState: Post[] = [
     {id: '1',
     title: 'Learning Redux Toolkit',
     content: "I've heard good things.",
@@ -26,7 +27,7 @@ const postsSlice = createSlice({
         postAdded: {
             reducer(
               state,
-              action: PayloadAction<{ id: string; title: string; content: string; userId: number; date: string}>
+              action: PayloadAction<Post>
             ) {
               state.push(action.payload);
             },
