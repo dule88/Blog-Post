@@ -1,8 +1,14 @@
 export interface Post {
     id: string;
     title: string;
-    content: string;
+    body: string;
     userId: number;
-    date: string;
+    datePosted: string;
+    // reactions: any;
 }
+
+// export interface Reaction {
+//     thumbsUp: number;
+//     heart: number;
+// }
 
