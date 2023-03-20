@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { selectAllPosts, fetchPosts } from './postsSlice';
 import PostAuthor from "./PostAuthor";
-
+import TimeAgo from "./TimeAgo";
 import { Post } from "./Post";
 
 import { useAppDispatch } from "../../../hooks/useAppDispatch";
@@ -16,7 +16,6 @@ const PostList = () => {
    const dispatch = useAppDispatch();
 
    const posts = useTypedSelector(selectAllPosts); 
-   
   
 
    useEffect(() => {
@@ -33,7 +32,7 @@ const PostList = () => {
         <p>{post.body.substring(0, 100)}</p>
         <p className="postCredit">
           <PostAuthor userId={post.userId}/>
-          {/* <TimeAgo timestamp={post.datePosted}/> */}
+          <TimeAgo timestamp={post.datePosted}/>
         </p>
         {/* <ReactionButtons post={post} /> */}
     </article>
