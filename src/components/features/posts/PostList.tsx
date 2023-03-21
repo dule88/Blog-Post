@@ -7,6 +7,7 @@ import { Post } from "./Post";
 
 import { useAppDispatch } from "../../../hooks/useAppDispatch";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
+import { Link } from 'react-router-dom';
 
 
 
@@ -28,9 +29,10 @@ const PostList = () => {
   
   const renderPosts = orderedPosts.map((post: Post) => (
     <article key={post.id}>
-        <h3>{post.title}</h3>
-        <p>{post.body.substring(0, 100)}</p>
+        <h3>{post.title.substring(0, 28)}</h3>
+        <p className="excerpt">{post.body.substring(0, 150)}...</p>
         <p className="postCredit">
+          <Link to={`post/${post.id}`}>View Post</Link>
           <PostAuthor userId={post.userId}/>
           <TimeAgo timestamp={post.datePosted}/>
         </p>

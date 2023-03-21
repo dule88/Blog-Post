@@ -1,7 +1,7 @@
 import { createSlice, nanoid, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import { RootState } from "../../../redux/store";
 import sub from "date-fns/sub";
-import { Post } from "./Post";
+import { Post } from './Post';
 import { getMembers,  BlogPost} from '../../../data/data'
 
 
@@ -45,6 +45,10 @@ const postsSlice = createSlice({
                     body,
                     datePosted: new Date().toISOString(),
                     userId,
+                    reactions: {
+                      thumbsUp: 0,
+                      heart: 0,
+                  },
                   }
               }
             }
@@ -58,6 +62,9 @@ const postsSlice = createSlice({
 });
 
 export const selectAllPosts = (state: RootState) => state.posts.postList;
+export const selectPostById = (state: RootState, postId: string) =>
+    state.posts.postList.find((post) => post.id === postId);
+
 
 
 export const { postAdded } = postsSlice.actions;

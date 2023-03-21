@@ -4,7 +4,6 @@ export interface Post {
     body: string;
     userId: number;
     datePosted: string;
-    // reactions: any;
 }
 
 // export interface Reaction {

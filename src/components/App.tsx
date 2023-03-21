@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 
-
-
 import { useAppDispatch } from "../hooks/useAppDispatch";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import { fetchUsers, selectUsers } from "../redux/user/userSlice";
@@ -11,7 +9,9 @@ import AddPostForm from "./features/posts/AddPostForm";
 import PostList from "./features/posts/PostList";
 import { GlobalStyles } from "./GlobalStyles/GlobalStyles";
 
-
+import SinglePostPage from "./features/posts/SinglePostPage";
+import Layout from "./Layout/Layout";
+import { Routes, Route} from 'react-router-dom';
 
 
 
@@ -33,8 +33,18 @@ export const App = () => {
       <Navbar />
       <StyledWrapper>
         <GlobalStyles />
-        <AddPostForm/>
-        <PostList/>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+
+            <Route index element={<PostList />} />
+
+            <Route path="post">
+              <Route index element={<AddPostForm />} />
+              <Route path=":postId" element={<SinglePostPage />} />
+            </Route>
+
+          </Route>
+        </Routes>
         {/* <h1>NaviPartner Tech Test</h1>
 
         <h2>Create your app here!</h2>
