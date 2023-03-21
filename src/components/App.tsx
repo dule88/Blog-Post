@@ -4,13 +4,13 @@ import styled from "styled-components";
 import { useAppDispatch } from "../hooks/useAppDispatch";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import { fetchUsers, selectUsers } from "../redux/user/userSlice";
-import { Navbar } from "./app/Navbar";
+// import { Navbar } from "./app/Navbar";
 import AddPostForm from "./features/posts/AddPostForm";
 import PostList from "./features/posts/PostList";
 import { GlobalStyles } from "./GlobalStyles/GlobalStyles";
 
 import SinglePostPage from "./features/posts/SinglePostPage";
-import Layout from "./Layout/Layout";
+import Layout from "./app/Layout";
 import { Routes, Route} from 'react-router-dom';
 
 
@@ -30,7 +30,7 @@ export const App = () => {
 
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <StyledWrapper>
         <GlobalStyles />
         <Routes>

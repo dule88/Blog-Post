@@ -29,7 +29,7 @@ const PostList = () => {
   
   const renderPosts = orderedPosts.map((post: Post) => (
     <article key={post.id}>
-        <h3>{post.title.substring(0, 28)}</h3>
+        <h2>{post.title.substring(0, 28)}</h2>
         <p className="excerpt">{post.body.substring(0, 150)}...</p>
         <p className="postCredit">
           <Link to={`post/${post.id}`}>View Post</Link>
@@ -42,7 +42,7 @@ const PostList = () => {
 
   return (
     <section>
-        <h2>Posts</h2>
+        
         {renderPosts}
     </section>
   )
