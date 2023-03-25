@@ -1,15 +1,16 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
-import { postAdded } from "./postsSlice";
 import { selectUsers } from "../../../redux/user/userSlice";
+import { addBlogPost } from "../../../data/data";
+import { nanoid } from "@reduxjs/toolkit";
+import { useNavigate } from 'react-router-dom';
 
 export const AddPostForm = () => {
-
-const dispatch = useDispatch();  
+  const navigate = useNavigate()
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [userId, setUserId] = useState("");
+  const [userId, setUserId] = useState<number>(0);
   
   const users = useSelector(selectUsers);
 
@@ -18,21 +19,31 @@ const dispatch = useDispatch();
   const onContentChanged = (e: React.FormEvent<HTMLTextAreaElement>) =>
     setContent((e.target as HTMLInputElement).value);
     const onAuthorChanged = (e: React.FormEvent<HTMLSelectElement>) =>
-    setUserId((e.target as HTMLInputElement).value);
+    setUserId(Number((e.target as HTMLInputElement).value));
 
-  const onSavePostClicked = () => {
-    if (title && content) {
-        dispatch(postAdded(title, content, userId))
-      
-      setTitle("");
-      setContent("");
+  const onSavePostClicked = async () => {
+
+    const payload = {
+      id: nanoid(),
+      userId,
+      title,
+      body: content,
+      datePosted: new Date().toISOString()
     }
+    try {
+    const res = await addBlogPost(payload);
+    navigate('/')
+  } catch (error) {
+    console.log(error);
+    
+  }
   };
 
 
   const canSave = Boolean(title) && Boolean(content) && Boolean(userId);
 
   const usersOptions = users.map((user) => (
+    
     <option key={user.id} value={user.id}>
       {user.first_name}
     </option>

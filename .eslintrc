@@ -1,5 +1,6 @@
 {
-  "extends": "sammy",
+  "extends": ["sammy", "prettier"],
+  "plugins": ["prettier"],
   "rules": {
     "react-intl-sammy/missing-formatted-message": "off"
   }

@@ -6,8 +6,4 @@ export interface Post {
     datePosted: string;
 }
 
-// export interface Reaction {
-//     thumbsUp: number;
-//     heart: number;
-// }
 

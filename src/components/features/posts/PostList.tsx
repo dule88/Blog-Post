@@ -1,51 +1,50 @@
-import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
-import { selectAllPosts, fetchPosts } from './postsSlice';
-import PostAuthor from "./PostAuthor";
-import TimeAgo from "./TimeAgo";
-import { Post } from "./Post";
-
+import React, { useEffect, useState } from "react";
+import { fetchPosts } from "./postsSlice";
 import { useAppDispatch } from "../../../hooks/useAppDispatch";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
-import { Link } from 'react-router-dom';
-
-
-
-
+import { selectUsers } from "../../../redux/user/userSlice";
+import UserRow from "../../app/UserRow";
 
 const PostList = () => {
-   const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
+  const users = useTypedSelector(selectUsers);
 
-   const posts = useTypedSelector(selectAllPosts); 
-  
+  const [pagination, setPagination] = useState(1);
+  const [subsetOfUsers, setSubsetOfUsers] = useState(users.slice(0, 10));
 
-   useEffect(() => {
+  useEffect(() => {
     dispatch(fetchPosts());
   }, []);
 
-   const orderedPosts = posts
-        .slice()
-        .sort((a: Post, b: Post) => b.datePosted.localeCompare(a.datePosted));
-  
-  const renderPosts = orderedPosts.map((post: Post) => (
-    <article key={post.id}>
-        <h2>{post.title.substring(0, 28)}</h2>
-        <p className="excerpt">{post.body.substring(0, 150)}...</p>
-        <p className="postCredit">
-          <Link to={`post/${post.id}`}>View Post</Link>
-          <PostAuthor userId={post.userId}/>
-          <TimeAgo timestamp={post.datePosted}/>
-        </p>
-        {/* <ReactionButtons post={post} /> */}
-    </article>
-  ));
+  useEffect(() => {
+    const newUsers = users.slice(pagination, pagination + 7);
+    setSubsetOfUsers(newUsers);
+  }, [pagination]);
+
+  const paginationHandler = (type: string) => {
+    if (type === "decrement") {
+      setPagination((prevState) => prevState - 1);
+    } else if (type === "increment") {
+      setPagination((prevState) => prevState + 1);
+    }
+  };
 
   return (
-    <section>
-        
-        {renderPosts}
-    </section>
-  )
-}
+    <>
+      {subsetOfUsers.map((user) => (
+        <UserRow
+          userId={user.id}
+          userName={user.first_name}
+          key={user.id}
+        />
+      ))}
+      <div>
+        <button className="paginations" disabled={pagination === 1}onClick={() => paginationHandler("decrement")}>Previous</button>{" "}
+        {pagination}{" "}
+        <button className="paginations" onClick={() => paginationHandler("increment")}>Next</button>
+      </div>
+    </>
+  );
+};
 
 export default PostList;

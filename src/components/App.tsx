@@ -11,9 +11,8 @@ import { GlobalStyles } from "./GlobalStyles/GlobalStyles";
 
 import SinglePostPage from "./features/posts/SinglePostPage";
 import Layout from "./app/Layout";
-import { Routes, Route} from 'react-router-dom';
-
-
+import EditPostForm from "./features/posts/EditPostForm";
+import { Routes, Route } from "react-router-dom";
 
 const StyledWrapper = styled.div`
   padding: 24px;
@@ -35,42 +34,15 @@ export const App = () => {
         <GlobalStyles />
         <Routes>
           <Route path="/" element={<Layout />}>
-
             <Route index element={<PostList />} />
 
             <Route path="post">
               <Route index element={<AddPostForm />} />
               <Route path=":postId" element={<SinglePostPage />} />
+              <Route path="edit/:postId" element={<EditPostForm />} />
             </Route>
-
           </Route>
         </Routes>
-        {/* <h1>NaviPartner Tech Test</h1>
-
-        <h2>Create your app here!</h2>
-        <p>Let's get you started:</p>
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Last Name</th>
-              <th>Email</th>
-              <th>Gender</th>
-              <th>IP Address</th>
-            </tr>
-          </thead>
-          <tbody>
-            {subsetOfUsers.map((user) => (
-              <tr key={user.id}>
-                <td>{user.first_name}</td>
-                <td>{user.last_name}</td>
-                <td>{user.email}</td>
-                <td>{user.gender}</td>
-                <td>{user.ip_address}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table> */}
       </StyledWrapper>
     </>
   );

@@ -1,44 +1,52 @@
-import React from 'react';
-import { useSelector } from 'react-redux'
-import { selectPostById } from './postsSlice'
+import React from "react";
+import { useSelector } from "react-redux";
+import { Link, useParams, useNavigate } from "react-router-dom";
 
+import { RootState } from "../../../redux/store";
 import PostAuthor from "./PostAuthor";
+import { selectPostById } from "./postsSlice";
 import TimeAgo from "./TimeAgo";
-// import ReactionButtons from "./ReactionButtons";
-import { useParams } from 'react-router-dom';
-import { RootState } from '../../../redux/store';
-
-
-
+import { deleteBlogPost } from "../../../data/data";
+import { useAppDispatch } from "../../../hooks/useAppDispatch";
+import { fetchPosts } from "./postsSlice";
 
 const SinglePostPage = () => {
-    const params = useParams();
-   const postId = params.postId ?? "";
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const params = useParams();
+  const postId = params.postId ?? "";
 
-    const post = useSelector((state: RootState) => 
-      selectPostById(state, postId)
-  );
+  const post = useSelector((state: RootState) => selectPostById(state, postId));
 
-    if (!post) {
-        return (
-            <section>
-                <h2>Post not found!</h2>
-            </section>
-        )
-    }
+  const deletePostHandler = async (id: string) => {
+    await deleteBlogPost(id);
+    dispatch(fetchPosts());
+    navigate("/");
+  };
 
+  if (!post) {
     return (
-        <article>
-            <h2>{post.title}</h2>
-            <p>{post.body}</p>
-            <p className="postCredit">
-                {/* <Link to={`/post/edit/${post.id}`}>Edit Post</Link> */}
-                <PostAuthor userId={post.userId} />
-                <TimeAgo timestamp={post.datePosted} />
-            </p>
-            {/* <ReactionButtons post={post} /> */}
-        </article>
-    )
-}
+      <section>
+        <h2>Post not found!</h2>
+      </section>
+    );
+  }
+
+  return (
+    <article>
+      <h2>{post.title.substring(0, 30)}</h2>
+      <p>{post.body.substring(0, 300)}</p>
+      <p className="postCredit">
+        <Link className="editButton" to={`/post/edit/${post.id}`}>Edit Post</Link>
+        <button className="deletePostButton" onClick={() => deletePostHandler(post.id)} type="button">
+          Delete post
+        </button>
+        <PostAuthor userId={post.userId} />
+        <TimeAgo timestamp={post.datePosted} />
+      </p>
+      <button className="backButton" onClick={() => navigate('/')}>BACK</button>
+    </article>
+  );
+};
 
 export default SinglePostPage;

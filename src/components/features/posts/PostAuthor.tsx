@@ -12,7 +12,7 @@ interface PostAuthorProps {
 
     const author = users.find(user => user.id == userId);
 
-    return <span>by {author ? author.first_name : 'Unknown author'}</span>
+    return <span style={{marginLeft: "0.5rem"}}>by {author ? author.first_name : 'Unknown author'}</span>
 };
 
 export default PostAuthor;
