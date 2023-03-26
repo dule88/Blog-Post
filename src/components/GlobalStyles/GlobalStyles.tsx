@@ -46,16 +46,17 @@ export const GlobalStyles = React.memo(
     nav ul {
       list-style-type: none;
     }
-    
     nav ul li {
       display: inline-block;
       margin-right: 1rem;
     }
-    nav a, nav a:visited {
+    nav a,
+    nav a:visited {
       color: #fff;
       text-decoration: none;
     }
-    nav a:hover, nav a:focus {
+    nav a:hover,
+    nav a:focus {
       text-decoration: underline;
     }
     main {
@@ -77,42 +78,36 @@ export const GlobalStyles = React.memo(
     h1 {
       font-size: 3.5rem;
     }
-    
     h2 {
       margin-bottom: 1rem;
-    
     }
-    
     p {
       font-family: Arial, Helvetica, sans-serif;
       line-height: 1.4;
       font-size: 1.2rem;
       margin: 0.5em 0;
     }
-    
     form {
       display: flex;
       flex-direction: column;
-      
     }
-    
     textarea {
       height: 200px;
     }
-    
     .postCredit {
       font-size: 1rem;
     }
-    
-    .postCredit a, 
+    .postCredit a,
     .postCredit a:visited {
       margin-right: 0.5rem;
       color: black;
     }
-    
-    .postCredit a:hover, 
+    .postCredit a:hover,
     .postCredit a:focus {
       color: hsla(0, 0%, 0%, 0.75);
+    }
+    table {
+      width: 100%;
     }
     tr {
       display: flex;
@@ -137,7 +132,6 @@ export const GlobalStyles = React.memo(
       box-shadow: 0.1rem 1rem -0.5rem rgba(0, 0, 0, 0.4);
       border-radius: 5px;
     }
-    
     summary {
       padding: 1rem;
       display: block;
@@ -146,9 +140,8 @@ export const GlobalStyles = React.memo(
       position: relative;
       cursor: pointer;
     }
-    
     summary:before {
-      content: '';
+      content: "";
       border-width: 0.4rem;
       border-style: solid;
       border-color: transparent transparent transparent #fff;
@@ -156,20 +149,15 @@ export const GlobalStyles = React.memo(
       top: 1.3rem;
       left: 1rem;
       transform: rotate(0);
-      transform-origin: .2rem 50%;
-      transition: .25s transform ease;
+      transform-origin: 0.2rem 50%;
+      transition: 0.25s transform ease;
     }
-    
-    /* THE MAGIC 🧙‍♀️ */
     details[open] > summary:before {
       transform: rotate(90deg);
     }
-    
-    
     details summary::-webkit-details-marker {
-      display:none;
+      display: none;
     }
-    
     details > ul {
       padding-bottom: 1rem;
       margin-bottom: 0;
@@ -261,7 +249,7 @@ export const GlobalStyles = React.memo(
     }
 
     @media only screen and (max-width: 768px) {
-      .test {
+      .responsiveButtons {
         display: none;
       }
     }

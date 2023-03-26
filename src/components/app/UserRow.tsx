@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { deleteBlogPost, deleteUser } from "../../data/data";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
@@ -13,6 +13,7 @@ interface User {
 }
 
 const UserRow = ({ userId, userName }: User) => {
+    const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [expanded, setExpanded] = useState(false);
   const [userPosts, setUserPosts] = useState<
@@ -22,6 +23,16 @@ const UserRow = ({ userId, userName }: User) => {
       title: string;
       body: string;
       datePosted: string;
+    }[]
+  >([]);
+  const [userState, setUserState] = useState<
+    {
+        id: typeof userId;
+        first_name: string;
+        last_name: string;
+        email: string;
+        gender: string;
+        ip_address: string;
     }[]
   >([]);
 
@@ -40,6 +51,8 @@ const UserRow = ({ userId, userName }: User) => {
   const deleteUserHandler = async (userId: number) => {
     await deleteUser(userId);
     dispatch(fetchUsers());
+    const newUsers = userState.filter((user) => user.id !== userId);
+    setUserState(newUsers);
   };
 
   const deletePostHandler = async (id: string) => {
@@ -54,18 +67,20 @@ const UserRow = ({ userId, userName }: User) => {
       <div className="accordian">
         <details onClick={fetchUserPosts}>
           <summary>{userName}</summary>
-          {userPosts.map((post) => (
-            <tr key={post.id}>
-              <td><Link className="postTitle" to={`/post/${post.id}`}>
-                {post.title.substring(0, 10)}...
-              </Link>
-              </td>
-              <td className="test">
-                <button className="deletePostButton" onClick={() => deletePostHandler(post.id)}>Delete post</button>
-              </td>
-              <td className="test"><button className="deleteUserButton" onClick={() => deleteUserHandler(userId)}>Delete user</button></td>
-            </tr>
-          ))}
+          <table>
+            <tbody>
+              {userPosts.map((post) => (
+                <tr key={post.id}>
+                    <td><Link className="postTitle" to={`/post/${post.id}`}>{post.title.substring(0, 10)}...</Link>
+                    </td>
+                    <td className="responsiveButtons">
+                        <button className="deletePostButton" onClick={() => deletePostHandler(post.id)}>Delete post</button>
+                    </td>
+                    <td className="responsiveButtons"><button className="deleteUserButton" onClick={() => deleteUserHandler(userId)}>Delete user</button></td>
+                </tr>
+              ))}
+          </tbody>
+               </table>
         </details>
       </div>
     </>
