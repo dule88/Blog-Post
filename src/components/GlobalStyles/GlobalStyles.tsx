@@ -74,7 +74,7 @@ export const GlobalStyles = React.memo(
       border: 1px solid #000;
       border-radius: 10px;
       padding: 1rem;
-      overflow: scroll;
+      overflow: auto;
     }
     h1 {
       font-size: 3.5rem;
