@@ -32,7 +32,7 @@ export const AddPostForm = () => {
     }
     try {
     const res = await addBlogPost(payload);
-    navigate('/')
+      navigate("/");
   } catch (error) {
     console.log(error);
     

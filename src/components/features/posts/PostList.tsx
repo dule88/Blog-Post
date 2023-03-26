@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { fetchPosts } from "./postsSlice";
+
 import { useAppDispatch } from "../../../hooks/useAppDispatch";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
+import UserRow from "../../../redux/user/UserRow";
 import { selectUsers } from "../../../redux/user/userSlice";
-import UserRow from "../../app/UserRow";
+import { fetchPosts } from "./postsSlice";
 
 const PostList = () => {
   const dispatch = useAppDispatch();
@@ -32,16 +33,23 @@ const PostList = () => {
   return (
     <>
       {subsetOfUsers.map((user) => (
-        <UserRow
-          userId={user.id}
-          userName={user.first_name}
-          key={user.id}
-        />
+        <UserRow key={user.id} userId={user.id} userName={user.first_name} />
       ))}
       <div>
-        <button className="paginations" disabled={pagination === 1}onClick={() => paginationHandler("decrement")}>Previous</button>{" "}
+        <button
+          className="paginations"
+          disabled={pagination === 1}
+          onClick={() => paginationHandler("decrement")}
+        >
+          Previous
+        </button>{" "}
         {pagination}{" "}
-        <button className="paginations" onClick={() => paginationHandler("increment")}>Next</button>
+        <button
+          className="paginations"
+          onClick={() => paginationHandler("increment")}
+        >
+          Next
+        </button>
       </div>
     </>
   );

@@ -73,7 +73,8 @@ export const GlobalStyles = React.memo(
       margin: 0.5em;
       border: 1px solid #000;
       border-radius: 10px;
-      padding: 1em;
+      padding: 1rem;
+      overflow: scroll;
     }
     h1 {
       font-size: 3.5rem;
@@ -247,10 +248,21 @@ export const GlobalStyles = React.memo(
       background: #4b4d4f;
       text-decoration: none;
     }
-
     @media only screen and (max-width: 768px) {
       .responsiveButtons {
         display: none;
+      }
+      main {
+        width: 100%;
+      }
+      h1 {
+        display: none;
+      }
+    }
+    @media only screen and (max-width: 468px) {
+      .deletePostButton {
+        display: block;
+        margin: 1rem 0 0.5rem;
       }
     }
   `}`,

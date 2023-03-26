@@ -1,14 +1,13 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
-import { RootState } from "../../../redux/store";
-import PostAuthor from "./PostAuthor";
-import { selectPostById } from "./postsSlice";
-import TimeAgo from "./TimeAgo";
 import { deleteBlogPost } from "../../../data/data";
 import { useAppDispatch } from "../../../hooks/useAppDispatch";
-import { fetchPosts } from "./postsSlice";
+import { RootState } from "../../../redux/store";
+import PostAuthor from "./PostAuthor";
+import { fetchPosts, selectPostById } from "./postsSlice";
+import TimeAgo from "./TimeAgo";
 
 const SinglePostPage = () => {
   const dispatch = useAppDispatch();
@@ -35,16 +34,24 @@ const SinglePostPage = () => {
   return (
     <article>
       <h2>{post.title.substring(0, 30)}</h2>
-      <p>{post.body.substring(0, 300)}</p>
+      <p>{post.body.substring(0, 200)}</p>
       <p className="postCredit">
-        <Link className="editButton" to={`/post/edit/${post.id}`}>Edit Post</Link>
-        <button className="deletePostButton" onClick={() => deletePostHandler(post.id)} type="button">
+        <Link className="editButton" to={`/post/edit/${post.id}`}>
+          Edit Post
+        </Link>
+        <button
+          className="deletePostButton"
+          onClick={() => deletePostHandler(post.id)}
+          type="button"
+        >
           Delete post
         </button>
         <PostAuthor userId={post.userId} />
         <TimeAgo timestamp={post.datePosted} />
       </p>
-      <button className="backButton" onClick={() => navigate('/')}>BACK</button>
+      <button className="backButton" onClick={() => navigate("/")}>
+        BACK
+      </button>
     </article>
   );
 };
