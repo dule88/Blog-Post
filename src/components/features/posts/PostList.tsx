@@ -8,21 +8,14 @@ import { fetchPosts } from "./postsSlice";
 
 const PostList = () => {
   const dispatch = useAppDispatch();
-  
-
   const [pagination, setPagination] = useState(1);
-  const users = useTypedSelector(selectUsers).slice((pagination - 1) * 10, pagination *10);
-  // const [subsetOfUsers, setSubsetOfUsers] = useState(users.slice(0, 10));
-
+  const users = useTypedSelector(selectUsers).slice(
+    (pagination - 1) * 10,
+    pagination * 10,
+  );
   useEffect(() => {
     dispatch(fetchPosts());
   }, []);
-
-  // useEffect(() => {
-  //   const newUsers = users.slice(pagination, pagination + 7);
-  //   setSubsetOfUsers(newUsers);
-  // }, [pagination]);
-
   const paginationHandler = (type: string) => {
     if (type === "decrement") {
       setPagination((prevState) => prevState - 1);

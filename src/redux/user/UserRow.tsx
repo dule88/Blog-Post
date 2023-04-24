@@ -27,17 +27,6 @@ const UserRow = ({ userId, userName }: User) => {
       datePosted: string;
     }[]
   >([]);
-  //   const [userState, setUserState] = useState<
-  //     {
-  //         id: typeof userId;
-  //         first_name: string;
-  //         last_name: string;
-  //         email: string;
-  //         gender: string;
-  //         ip_address: string;
-  //     }[]
-  //   >([]);
-
   const posts = useTypedSelector(selectAllPosts);
 
   const fetchUserPosts = () => {
@@ -51,8 +40,6 @@ const UserRow = ({ userId, userName }: User) => {
   const deleteUserHandler = async (userId: number) => {
     await deleteUser(userId);
     dispatch(fetchUsers());
-    // const newUsers = userState.filter((user) => user.id !== userId);
-    // setUserState(newUsers);
   };
 
   const deletePostHandler = async (id: string) => {

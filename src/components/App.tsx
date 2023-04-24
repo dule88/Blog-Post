@@ -1,18 +1,15 @@
 import React, { useEffect } from "react";
+import { Route, Routes } from "react-router-dom";
 import styled from "styled-components";
 
 import { useAppDispatch } from "../hooks/useAppDispatch";
-import { useTypedSelector } from "../hooks/useTypedSelector";
-import { fetchUsers, selectUsers } from "../redux/user/userSlice";
-
-import AddPostForm from "./features/posts/AddPostForm";
-import PostList from "./features/posts/PostList";
-import { GlobalStyles } from "./GlobalStyles/GlobalStyles";
-
-import SinglePostPage from "./features/posts/SinglePostPage";
+import { fetchUsers } from "../redux/user/userSlice";
 import Layout from "./app/Layout";
+import AddPostForm from "./features/posts/AddPostForm";
 import EditPostForm from "./features/posts/EditPostForm";
-import { Routes, Route } from "react-router-dom";
+import PostList from "./features/posts/PostList";
+import SinglePostPage from "./features/posts/SinglePostPage";
+import { GlobalStyles } from "./GlobalStyles/GlobalStyles";
 
 const StyledWrapper = styled.div`
   padding: 24px;
@@ -30,13 +27,13 @@ export const App = () => {
       <StyledWrapper>
         <GlobalStyles />
         <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<PostList />} />
+          <Route element={<Layout />} path="/">
+            <Route element={<PostList />} index />
 
             <Route path="post">
-              <Route index element={<AddPostForm />} />
-              <Route path=":postId" element={<SinglePostPage />} />
-              <Route path="edit/:postId" element={<EditPostForm />} />
+              <Route element={<AddPostForm />} index />
+              <Route element={<SinglePostPage />} path=":postId" />
+              <Route element={<EditPostForm />} path="edit/:postId" />
             </Route>
           </Route>
         </Routes>
